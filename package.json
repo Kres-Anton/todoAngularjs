@@ -1,0 +1,76 @@
+{
+  "name": "todo-angularjs",
+  "version": "1.0.0",
+  "description": "crud app for help you with home payments",
+  "scripts": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kres-Anton/todoAngularjs.git"
+  },
+  "keywords": [
+    "todo",
+    "angularjs"
+  ],
+  "author": "Kres Anton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kres-Anton/todoAngularjs/issues"
+  },
+  "homepage": "https://github.com/Kres-Anton/todoAngularjs#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.15",
+    "angular": "^1.6.9",
+    "angular-ui-router": "^1.0.3",
+    "async": "^2.6.0",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0",
+    "bower": "^1.8.2",
+    "crypto": "^1.0.1",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.0",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.8",
+    "morgan": "^1.9.0",
+    "nconf": "^0.10.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "browser-sync": "^2.23.6",
+    "css-loader": "^0.28.10",
+    "del": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-debug": "^3.2.0",
+    "gulp-exec": "^3.0.1",
+    "gulp-express": "^0.3.5",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-less": "^4.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulplog": "^1.0.0",
+    "imagemin-jpegtran": "^5.0.2",
+    "imagemin-pngquant": "^5.0.1",
+    "jasmine": "^3.1.0",
+    "jshint-loader": "^0.8.4",
+    "karma": "^2.0.0",
+    "less-plugin-autoprefix": "^1.5.1",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7",
+    "stream-combiner2": "^1.1.1",
+    "style-loader": "^0.20.2",
+    "tslint": "^5.9.1",
+    "tslint-loader": "^3.6.0",
+    "uglifyjs-webpack-plugin": "^1.2.2",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^4.1.0",
+    "webpack-stream": "^4.0.2"
+  }
+}
