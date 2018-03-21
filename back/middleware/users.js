@@ -23,7 +23,7 @@ exports.post = (req, res, next)=>{
 	}
 
 exports.get= (req, res, next)=>{
-	
+
 	if (!req.params.id){
 		User.find({},(err, users)=>{
 			if (err) res.send({err: err, success: false});
@@ -40,7 +40,7 @@ exports.get= (req, res, next)=>{
 				res.send({users: data, success: true});
 			};
 
-				res.send({users: null, success: false});		
+				res.send({users: null, success: false});
 		});
 
 	} else {
@@ -55,9 +55,9 @@ exports.get= (req, res, next)=>{
                       				photo:user.photo
                       				};
             	res.send({user: data, success: true});
+				} else {
+					res.send({users: null, success: false});
 				};
-
-				res.send({users: null, success: false});				
 			});
 		};
 }
@@ -80,7 +80,32 @@ exports.delete = (req,res,next)=>{
             	res.send({user: data, success: true});
 				};
 
-		res.send({user: null, success: false});	
+		res.send({user: null, success: false});
 		});
+
+}
+
+
+
+exports.put = (req,res,next)=>{
+	if(!req.body.user) res.send({msg:'need for user in body',success:false});
+
+	let user = JSON.parse(req.body.user);
+
+	let newUser = new User({username:user.username,password:user.password});
+	 newUser.save((err)=>{
+			 if (err) return callback(err);
+
+			 res.send({
+						 user:{
+							 id:newUser._id,
+							 username:newUser.username,
+							 created:newUser.created,
+							 role:newUser.role,
+							 photo:newUser.photo
+							 }
+						 ,success: true
+					 });
+	 });
 
 }
