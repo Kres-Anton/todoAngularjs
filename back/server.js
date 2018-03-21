@@ -46,17 +46,28 @@ app.use(allowCrossDomain);
 let login = require('./middleware/login');
 let auth = require('./middleware/auth');
 let user = require('./middleware/users');
+let flat = require('./middleware/flats');
 
 
 // application -------------------------------------------------------------
+// Authorization check
 app.post('/api/*',auth);
 app.get('/api/*',auth);
+
+//user api
 app.post('/api/login',login.post);
 app.get('/api/user',user.get);
 app.get('/api/user/:id',user.get);
 app.post('/api/user',user.post);
 app.delete('/api/user',user.delete);
 app.put('/api/user',user.put);
+
+//flat api
+app.get('/api/flat',flat.get);
+app.get('/api/flat/:id',flat.get);
+app.post('/api/flat',flat.post);
+app.delete('/api/flat',flat.delete);
+app.put('/api/flat',flat.put);
 
 
 
