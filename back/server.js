@@ -68,6 +68,7 @@ app.get('/api/flat/:id',flat.get);
 app.post('/api/flat',flat.post);
 app.delete('/api/flat',flat.delete);
 app.put('/api/flat',flat.put);
+app.get('/api/flat/owner/:id',flat.getByOwner);
 
 
 

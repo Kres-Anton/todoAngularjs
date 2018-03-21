@@ -25,15 +25,16 @@ exports.post = (req, res, next)=>{
                       				};
             	res.send({flat: data, success: true});
 				});
-	}
+	};
 
 exports.get= (req, res, next)=>{
 
 	if (!req.params.id){
-		Flat.find({},(err, flat)=>{
+		Flat.find({},(err, flats)=>{
 			if (err) res.send({err: err, success: false});
-			if(falt){
+			if(falts){
 				let data=flats.map((flat)=>{
+                                  {
                           				id:flat._id,
                           				flatName:flat.flatName,
                           				city:flat.city,
@@ -74,7 +75,7 @@ exports.get= (req, res, next)=>{
 				};
 			});
 		};
-}
+};
 
 exports.delete = (req,res,next)=>{
 	if(!req.body.flat) res.send({msg:'need for flat in body',success:false});
@@ -102,7 +103,7 @@ exports.delete = (req,res,next)=>{
 		res.send({flat: null, success: false});
 		});
 
-}
+};
 
 
 
@@ -142,4 +143,36 @@ exports.put = (req,res,next)=>{
 					 });
 	 });
 
-}
+};
+
+
+
+exports.getByOwner= (req, res, next)=>{
+
+	if (!req.params.id){
+    res.send({msg:'need for owner in request',success:false});
+	} else {
+		Flat.find({ownerId:req.params.id},(err, flats)=>{
+			if (err) res.send({err: err, success: false});
+			if(flats){
+				let data=flats.map((flat)=>{
+                                  {
+                          				id:flat._id,
+                          				flatName:flat.flatName,
+                          				city:flat.city,
+                                  street:flat.street,
+                                  house:flat.house,
+                                  flatNumber:flat.flatNumber,
+                          				created:flat.created,
+                          				people:flat.people,
+                                  square:flat.square,
+                                  ownerId:flat.ownerId
+                          				}
+				});
+				res.send({flat: data, success: true});
+			} else {
+					res.send({flat: null, success: false});
+				};
+			});
+		};
+};
