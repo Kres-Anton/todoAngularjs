@@ -1,5 +1,17 @@
 let Flat = require("../models/flat").Flat;
 
+
+
+function makeFlat(data){
+
+	let flat = {};
+	for (var key in data){
+		flat[key]=data[key];
+	}
+
+	return flat;
+}
+
 exports.post = (req, res, next)=>{
 	if(!req.body.flat) res.send({msg:'need for flat in body',success:false});
 
@@ -11,19 +23,7 @@ exports.post = (req, res, next)=>{
 
 	newFlat.save((err,flat)=>{
 		if (err) res.send({err: err, success: false});
-		let data={
-                      				id:flat._id,
-                      				flatName:flat.flatName,
-                      				city:flat.city,
-                              street:flat.street,
-                              house:flat.house,
-                              flatNumber:flat.flatNumber,
-                      				created:flat.created,
-                      				people:flat.people,
-                              square:flat.square,
-                              ownerId:flat.ownerId
-                      				};
-            	res.send({flat: data, success: true});
+            	res.send({flat: makeFlat(flat), success: true});
 				});
 	};
 
@@ -33,20 +33,7 @@ exports.get= (req, res, next)=>{
 		Flat.find({},(err, flats)=>{
 			if (err) res.send({err: err, success: false});
 			if(falts){
-				let data=flats.map((flat)=>{
-                                  {
-                          				id:flat._id,
-                          				flatName:flat.flatName,
-                          				city:flat.city,
-                                  street:flat.street,
-                                  house:flat.house,
-                                  flatNumber:flat.flatNumber,
-                          				created:flat.created,
-                          				people:flat.people,
-                                  square:flat.square,
-                                  ownerId:flat.ownerId
-                          				}
-				});
+				let data=flats.map((flat)=>makeFlat(flat));
 				res.send({flat: data, success: true});
 			};
 
@@ -56,23 +43,10 @@ exports.get= (req, res, next)=>{
 	} else {
 		Flat.findOne({_id:req.params.id},(err, flat)=>{
 			if (err) res.send({err: err, success: false});
-			if(flat){
-				let data={
-                          				id:flat._id,
-                          				flatName:flat.flatName,
-                          				city:flat.city,
-                                  street:flat.street,
-                                  house:flat.house,
-                                  flatNumber:flat.flatNumber,
-                          				created:flat.created,
-                          				people:flat.people,
-                                  square:flat.square,
-                                  ownerId:flat.ownerId
-                          				};
-            	res.send({flat: data, success: true});
-				} else {
-					res.send({flat: null, success: false});
-				};
+
+			if(flat) res.send({flat: makeFlat(flat), success: true});
+
+			res.send({flat: null, success: false});
 			});
 		};
 };
@@ -84,21 +58,7 @@ exports.delete = (req,res,next)=>{
 
 	Flat.remove({_id:flat.id},(err,flat)=>{
 		if (err) res.send({err: err, success: false});
-		if(flat){
-				let data={
-                          				id:flat._id,
-                          				flatName:flat.flatName,
-                          				city:flat.city,
-                                  street:flat.street,
-                                  house:flat.house,
-                                  flatNumber:flat.flatNumber,
-                          				created:flat.created,
-                          				people:flat.people,
-                                  square:flat.square,
-                                  ownerId:flat.ownerId
-                          				};
-            	res.send({flat: data, success: true});
-				};
+		if(flat) res.send({flat: makeFlat(flat), success: true});
 
 		res.send({flat: null, success: false});
 		});
@@ -126,21 +86,7 @@ exports.put = (req,res,next)=>{
 	 newFlat.save((err)=>{
 			 if (err) return callback(err);
 
-			 res.send({
-						 flat:{
-                               				id:newFlat._id,
-                               				flatName:newFlat.flatName,
-                               				city:newFlat.city,
-                                      street:newFlat.street,
-                                      house:newFlat.house,
-                                      flatNumber:newFlat.flatNumber,
-                               				created:newFlat.created,
-                               				people:newFlat.people,
-                                      square:newFlat.square,
-                                      ownerId:newFlat.ownerId
-                               				}
-						 ,success: true
-					 });
+			 res.send({falt:makeFlat(newFlat),success: true });
 	 });
 
 };
@@ -155,20 +101,7 @@ exports.getByOwner= (req, res, next)=>{
 		Flat.find({ownerId:req.params.id},(err, flats)=>{
 			if (err) res.send({err: err, success: false});
 			if(flats){
-				let data=flats.map((flat)=>{
-                                  {
-                          				id:flat._id,
-                          				flatName:flat.flatName,
-                          				city:flat.city,
-                                  street:flat.street,
-                                  house:flat.house,
-                                  flatNumber:flat.flatNumber,
-                          				created:flat.created,
-                          				people:flat.people,
-                                  square:flat.square,
-                                  ownerId:flat.ownerId
-                          				}
-				});
+				let data=flats.map((flat)=>makeFlat(flat));
 				res.send({flat: data, success: true});
 			} else {
 					res.send({flat: null, success: false});
